@@ -210,7 +210,8 @@ workflows:
               only: /.*/
           requires:
               - py35-quality
-              - py35- py35-integration
+              - py35-unit
+              - py35-integration
       - deploy:
           name: py35-deploy-bdist_wheel
           docker_image: circleci/python:3.5
