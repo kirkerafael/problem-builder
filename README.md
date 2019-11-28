@@ -110,38 +110,21 @@ Access it at [http://localhost:8000/](http://localhost:8000).
 Running tests
 -------------
 
-Install [Xvfb](https://en.wikipedia.org/wiki/Xvfb). For instance:
-
-```bash
-$ apt-get install xvfb
-```
-
-Install [firefox
-38.0.5](https://ftp.mozilla.org/pub/firefox/releases/38.0.5) in
-`/opt/firefox-38.0.5`. For instance:
-
-```bash
-$ mkdir /opt/firefox-38.0.5
-$ cd /opt/firefox-38.0.5
-$ wget https://ftp.mozilla.org/pub/firefox/releases/38.0.5/linux-x86_64/en-US/firefox-38.0.5.tar.bz2
-$ tar -xvf firefox-38.0.5.tar.bz2
-```
-
 From the xblock-problem-builder repository root, run the tests with the
 following command:
 
 ```bash
-$ PATH=/opt/firefox-38.0.5/firefox tox
+$ tox
 ```
 
 To run only the quality tests run:
 ```bash
-$ PATH=/opt/firefox-38.0.5/firefox tox -e quality
+$ tox -e quality
 ```
 
 To run only the integration tests run:
 ```bash
-$ PATH=/opt/firefox-38.0.5/firefox tox -e integration
+$ tox -e integration
 ```
 
 Working with Translations

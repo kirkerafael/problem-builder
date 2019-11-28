@@ -8,6 +8,8 @@ jobs:
             type: string
         docker_image:
             type: string
+    environment:
+      MOZ_HEADLESS: 1
     steps:
       - checkout
       - run:
