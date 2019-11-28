@@ -12,3 +12,6 @@ XBlock>=1.2
 Django>=1.11,<2.0
 pytest
 coverage
+-e git+https://github.com/edx/xblock-sdk.git@v0.1.6#egg=xblock-sdk
+pylint
+pycodestyle
