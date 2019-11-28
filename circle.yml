@@ -42,6 +42,7 @@ jobs:
             geckodriver --version
             which firefox
             firefox --version
+            venv/bin/pip freeze
             mkdir -p /tmp/coverage/$CIRCLE_SHA1
             venv/bin/tox -e <<parameters.tox_env>>
             if [ -e .coverage.* ]; then
