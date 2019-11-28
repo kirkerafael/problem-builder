@@ -52,7 +52,10 @@ jobs:
 
   coverage:
     docker:
-      - image: circleci/python:2.7.14
+      - image: <<parameters.docker_image>>
+    parameters:
+        docker_image:
+            type: string
     steps:
       - checkout
       - run:
@@ -116,33 +119,6 @@ jobs:
             . venv/bin/activate
             twine upload dist/*
 
-  coverage_python3:
-    docker:
-      - image: circleci/python:3.5
-    steps:
-      - checkout
-      - run:
-          name: Update system
-          command: |
-            # The jessie-updates and jessie-backports areas are now removed from the repositories. So
-            # the lines corresponding to those areas have to be removed to fix the resulting errors.
-            # This can be removed after upgrading to the image based on Debian Stretch.
-            sudo sed -i '/jessie-updates/d' /etc/apt/sources.list
-            sudo sed -i '/jessie-backports/d' /etc/apt/sources.list
-            sudo apt-get update
-            sudo pip install --upgrade pip
-            sudo pip install --upgrade virtualenv
-            virtualenv venv
-            source venv/bin/activate
-            pip install -r test_requirements.txt
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          command: |
-              source venv/bin/activate
-              coverage combine /tmp/workspace/coverage/$CIRCLE_SHA1/
-              coverage report
-
   deploy_python3:
     docker:
       - image: circleci/python:3.5
@@ -186,7 +162,7 @@ workflows:
   build_and_deploy:
     jobs:
       - build:
-          name: quality
+          name: py27-quality
           tox_env: py27-quality
           docker_image: circleci/python:2.7.14-browsers
           filters:
@@ -207,17 +183,19 @@ workflows:
             tags:
               only: /.*/
       - coverage:
-          name: coverage
+          name: py27-coverage
+          docker_image: circleci/python:2.7.14
           filters:
             tags:
               only: /.*/
           requires:
-              - quality
+              - py27-quality
               - py27-django111-unit
               - py27-django111-integration
       - deploy:
+          name: py27-deploy
           requires:
-            - coverage
+            - py27-coverage
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
@@ -225,7 +203,7 @@ workflows:
               ignore: /.*/
 
       - build:
-          name: quality_python3
+          name: py35-quality
           tox_env: py35-quality
           docker_image: circleci/python:3.5-browsers
           filters:
@@ -245,18 +223,20 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - coverage_python3:
-          name: coverage_python3
+      - coverage:
+          name: py35-coverage
+          docker_image: circleci/python:3.5
           filters:
             tags:
               only: /.*/
           requires:
-              - quality_python3
+              - py35-quality
               - py35-django111-unit
               - py35-django111-integration
       - deploy_python3:
+          name: py35-deploy
           requires:
-            - coverage_python3
+            - py35-coverage
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
