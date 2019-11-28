@@ -155,7 +155,7 @@ class TableColumnHeader(Change):
                 if child.text:
                     header_html += child.text
                 for grandchild in list(child):
-                    header_html += etree.tostring(grandchild)
+                    header_html += six.text_type(etree.tostring(grandchild))
                 to_remove.append(child)
             elif child.tag == "pb-answer":
                 child.tag = "pb-answer-recap"

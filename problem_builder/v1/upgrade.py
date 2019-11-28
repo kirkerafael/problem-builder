@@ -32,7 +32,7 @@ instance which was kept on gsehub's GitHub account.
 import logging
 import sys
 import warnings
-from StringIO import StringIO
+from six import StringIO
 
 import six
 from lxml import etree

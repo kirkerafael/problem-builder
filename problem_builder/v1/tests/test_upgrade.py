@@ -22,7 +22,7 @@ Test that we can upgrade from mentoring v1 to problem builder (v2).
 """
 import os.path
 import unittest
-from StringIO import StringIO
+from six import StringIO
 
 import ddt
 from lxml import etree
