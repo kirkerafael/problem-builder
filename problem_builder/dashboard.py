@@ -368,7 +368,7 @@ class DashboardBlock(StudioEditableXBlockMixin, ExportMixin, XBlock):
 
     def color_for_value(self, value):
         """ Given a string value, get the color rule that matches, if any """
-        if isinstance(value, basestring):
+        if isinstance(value, six.string_types):
             if value.isnumeric():
                 value = float(value)
             else:
@@ -516,7 +516,7 @@ class DashboardBlock(StudioEditableXBlockMixin, ExportMixin, XBlock):
 
         if data.average_labels:
             for key, value in data.average_labels.iteritems():
-                if not isinstance(value, basestring):
+                if not isinstance(value, six.string_types):
                     add_error(
                         _(u"'Label for average value' is malformed: value for key {key} is {value}, expected string")
                         .format(key=key, value=value)

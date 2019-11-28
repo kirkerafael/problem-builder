@@ -175,7 +175,7 @@ class MentoringTableBlock(
     @property
     def block_id(self):
         usage_id = self.scope_ids.usage_id
-        if isinstance(usage_id, basestring):
+        if isinstance(usage_id, six.string_types):
             return usage_id
         try:
             return six.text_type(usage_id.replace(branch=None, version_guid=None))

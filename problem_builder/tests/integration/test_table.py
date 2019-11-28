@@ -28,6 +28,7 @@ from .base_test import MentoringBaseTest
 
 # Classes ###########################################################
 
+
 class MentoringTableBlockTest(MentoringBaseTest):
 
     def test_mentoring_table(self):

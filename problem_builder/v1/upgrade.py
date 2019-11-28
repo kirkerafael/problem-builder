@@ -73,7 +73,7 @@ def upgrade_block(store, block, from_version="v1"):
             block = runtime.construct_xblock_from_class(cls, keys)
             block.data = node.text if node.text else ""
             for child in list(node):
-                if isinstance(child.tag, basestring):
+                if isinstance(child.tag, six.string_types):
                     block.data += etree.tostring(child)
             return block
         HtmlDescriptor.parse_xml = parse_xml_for_HtmlDescriptor

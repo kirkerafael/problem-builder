@@ -25,6 +25,7 @@ from .base_test import (GetChoices, MentoringAssessmentBaseTest,
 
 # Classes ###########################################################
 
+
 class CompletionBlockTestMixin(object):
     """
     Mixin for testing completion blocks.

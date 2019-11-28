@@ -23,6 +23,7 @@ from .base_test import MentoringBaseTest
 
 # Classes ###########################################################
 
+
 class MentoringProgressionTest(MentoringBaseTest):
 
     def assert_warning(self, warning_dom, link_href):
