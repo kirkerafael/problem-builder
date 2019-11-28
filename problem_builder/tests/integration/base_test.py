@@ -18,15 +18,15 @@
 # "AGPLv3".  If not, see <http://www.gnu.org/licenses/>.
 #
 import mock
-
 from xblock.fields import String
-from xblockutils.base_test import SeleniumBaseTest, SeleniumXBlockTest
-from xblockutils.resources import ResourceLoader
 
 # Studio adds a url_name property to each XBlock but Workbench doesn't.
 # Since we rely on it, we need to mock url_name support so it can be set via XML and
 # accessed like a normal field.
 from problem_builder.mentoring import MentoringBlock
+from xblockutils.base_test import SeleniumBaseTest, SeleniumXBlockTest
+from xblockutils.resources import ResourceLoader
+
 MentoringBlock.url_name = String()
 
 loader = ResourceLoader(__name__)

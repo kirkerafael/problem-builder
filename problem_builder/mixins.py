@@ -2,13 +2,13 @@ import json
 
 import webob
 from lazy import lazy
-from problem_builder.tests.unit.utils import DateTimeEncoder
 from xblock.core import XBlock
-from xblock.fields import String, Boolean, Float, Scope, UNIQUE_ID
+from xblock.fields import UNIQUE_ID, Boolean, Float, Scope, String
 from xblock.fragment import Fragment
+
+from problem_builder.tests.unit.utils import DateTimeEncoder
 from xblockutils.helpers import child_isinstance
 from xblockutils.resources import ResourceLoader
-
 
 loader = ResourceLoader(__name__)
 

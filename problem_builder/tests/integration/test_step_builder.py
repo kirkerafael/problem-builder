@@ -1,10 +1,12 @@
+from ddt import data, ddt, unpack
 from mock import patch
-from ddt import ddt, data, unpack
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 
 from workbench.runtime import WorkbenchRuntime
-from .base_test import CORRECT, INCORRECT, PARTIAL, MentoringAssessmentBaseTest, GetChoices
+
+from .base_test import (CORRECT, INCORRECT, PARTIAL, GetChoices,
+                        MentoringAssessmentBaseTest)
 from .test_dashboard import MockSubmissionsAPI
 
 

@@ -22,7 +22,6 @@
 
 from .base_test import MentoringBaseTest
 
-
 # Classes ###########################################################
 
 class AnswerBlockTest(MentoringBaseTest):

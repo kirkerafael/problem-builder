@@ -30,20 +30,22 @@ import ast
 import json
 import logging
 import operator as op
-from django.template.defaultfilters import floatformat
 
-from .dashboard_visual import DashboardVisualData
-from .mcq import MCQBlock
-from .sub_api import sub_api
+import six
+from django.template.defaultfilters import floatformat
 from lazy import lazy
 from xblock.core import XBlock
-from xblock.fields import Scope, List, String, Boolean, Dict
+from xblock.fields import Boolean, Dict, List, Scope, String
 from xblock.fragment import Fragment
 from xblock.validation import ValidationMessage
+
 from xblockutils.helpers import child_isinstance
 from xblockutils.resources import ResourceLoader
 from xblockutils.studio_editable import StudioEditableXBlockMixin
 
+from .dashboard_visual import DashboardVisualData
+from .mcq import MCQBlock
+from .sub_api import sub_api
 
 # Globals ###########################################################
 
@@ -359,8 +361,8 @@ class DashboardBlock(StudioEditableXBlockMixin, ExportMixin, XBlock):
         """
         return dict(
             student_id=self.runtime.anonymous_student_id,
-            course_id=unicode(usage_key.course_key),
-            item_id=unicode(usage_key),
+            course_id=six.text_type(usage_key.course_key),
+            item_id=six.text_type(usage_key),
             item_type=usage_key.block_type,
         )
 
@@ -494,7 +496,7 @@ class DashboardBlock(StudioEditableXBlockMixin, ExportMixin, XBlock):
         try:
             list(self.get_mentoring_blocks(data.mentoring_ids, ignore_errors=False))
         except InvalidUrlName as e:
-            add_error(_(u'Invalid block url_name given: "{bad_url_name}"').format(bad_url_name=unicode(e)))
+            add_error(_(u'Invalid block url_name given: "{bad_url_name}"').format(bad_url_name=six.text_type(e)))
 
         if data.exclude_questions:
             for key, value in data.exclude_questions.iteritems():
@@ -531,7 +533,7 @@ class DashboardBlock(StudioEditableXBlockMixin, ExportMixin, XBlock):
             try:
                 self.parse_color_rules_str(data.color_rules, ignore_errors=False)
             except ValueError as e:
-                add_error(unicode(e))
+                add_error(six.text_type(e))
 
         if data.visual_rules:
             try:

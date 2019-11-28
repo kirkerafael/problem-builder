@@ -4,10 +4,9 @@ from datetime import datetime
 
 import pytz
 from mock import MagicMock, Mock
-
 from xblock.core import XBlock
 from xblock.field_data import DictFieldData
-from xblock.fields import String, Scope, Boolean, Integer, DateTime
+from xblock.fields import Boolean, DateTime, Integer, Scope, String
 
 from problem_builder.mixins import StudentViewUserStateMixin
 

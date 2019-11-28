@@ -21,11 +21,12 @@
 Test that <span class="pb-clarification"> elements are transformed into LMS-like tooltips.
 """
 
+from cgi import escape
+
 # Imports ###########################################################
 import ddt
-from cgi import escape
-from xblockutils.base_test import SeleniumXBlockTest
 
+from xblockutils.base_test import SeleniumXBlockTest
 
 # Classes ###########################################################
 

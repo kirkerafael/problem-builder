@@ -24,8 +24,8 @@ Test that the various title/display_name options for Answer and MCQ/MRQ/Ratings 
 # Imports ###########################################################
 import ddt
 from mock import patch
-from xblockutils.base_test import SeleniumXBlockTest
 
+from xblockutils.base_test import SeleniumXBlockTest
 
 # Classes ###########################################################
 

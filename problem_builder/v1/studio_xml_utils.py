@@ -27,7 +27,8 @@ It works by parsing the XML and creating XBlocks in a temporary runtime
 environment, so that the blocks' fields can be read and copied into Studio.
 """
 from xblock.fields import Scope
-from xblock.runtime import Runtime, DictKeyValueStore, KvsFieldData, MemoryIdManager, ScopeIds
+from xblock.runtime import (DictKeyValueStore, KvsFieldData, MemoryIdManager,
+                            Runtime, ScopeIds)
 
 
 class TransientRuntime(Runtime):

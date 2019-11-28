@@ -21,7 +21,6 @@
 # Imports ###########################################################
 from .base_test import MentoringBaseTest
 
-
 # Classes ###########################################################
 
 class MentoringProgressionTest(MentoringBaseTest):

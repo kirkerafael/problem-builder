@@ -20,9 +20,11 @@
 """
 Each class in this file represents a change made to the XML schema between v1 and v2.
 """
-from lxml import etree
 import json
 import warnings
+
+import six
+from lxml import etree
 
 
 class Change(object):
@@ -318,7 +320,7 @@ class CommaSeparatedListToJson(Change):
     APPLY_TO_ATTRIBUTES = ("values", "correct_choices", "required_choices", "ignored_choices")
 
     def _convert_value(self, raw_value):
-        return json.dumps([unicode(val).strip() for val in raw_value.split(',')])
+        return json.dumps([six.text_type(val).strip() for val in raw_value.split(',')])
 
     @staticmethod
     def applies_to(node):

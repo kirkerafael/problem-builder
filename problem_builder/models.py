@@ -20,9 +20,9 @@
 
 # Imports ###########################################################
 
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import pre_delete
-from django.contrib.auth.models import User
 
 try:
     # workaround so we don't explicitly import the AnonymousUserId model from LMS

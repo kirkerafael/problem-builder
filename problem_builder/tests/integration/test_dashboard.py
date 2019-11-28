@@ -20,9 +20,11 @@
 import json
 from functools import wraps
 from textwrap import dedent
+
 from mock import Mock, patch
-from .base_test import ProblemBuilderBaseTest
 from selenium.common.exceptions import NoSuchElementException
+
+from .base_test import ProblemBuilderBaseTest
 
 
 class MockSubmissionsAPI(object):

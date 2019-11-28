@@ -20,18 +20,19 @@
 
 import logging
 
+import six
 from xblock.core import XBlock
-from xblock.fields import String, Scope
+from xblock.fields import Scope, String
 from xblock.fragment import Fragment
+
 from xblockutils.resources import ResourceLoader
-from xblockutils.studio_editable import (
-    NestedXBlockSpec, StudioEditableXBlockMixin, StudioContainerWithNestedXBlocksMixin, XBlockWithPreviewMixin
-)
+from xblockutils.studio_editable import (NestedXBlockSpec,
+                                         StudioContainerWithNestedXBlocksMixin,
+                                         StudioEditableXBlockMixin,
+                                         XBlockWithPreviewMixin)
+
+from .mixins import NoSettingsMixin, XBlockWithTranslationServiceMixin
 from .utils import I18NService
-
-
-from .mixins import XBlockWithTranslationServiceMixin, NoSettingsMixin
-
 
 log = logging.getLogger(__name__)
 loader = ResourceLoader(__name__)
@@ -113,7 +114,7 @@ class ConditionalMessageBlock(
 
     def student_view_data(self, context=None):
         return {
-            'block_id': unicode(self.scope_ids.usage_id),
+            'block_id': six.text_type(self.scope_ids.usage_id),
             'display_name': self.display_name_with_default,
             'type': self.CATEGORY,
             'content': self.content,
@@ -168,7 +169,7 @@ class ScoreSummaryBlock(XBlockWithTranslationServiceMixin, XBlockWithPreviewMixi
 
     def student_view_data(self, context=None):
         return {
-            'block_id': unicode(self.scope_ids.usage_id),
+            'block_id': six.text_type(self.scope_ids.usage_id),
             'display_name': self.display_name_with_default,
             'type': self.CATEGORY,
         }
@@ -223,7 +224,7 @@ class PerQuestionFeedbackBlock(XBlockWithTranslationServiceMixin, XBlockWithPrev
 
     def student_view_data(self, context=None):
         return {
-            'block_id': unicode(self.scope_ids.usage_id),
+            'block_id': six.text_type(self.scope_ids.usage_id),
             'display_name': self.display_name_with_default,
             'type': self.CATEGORY,
         }
@@ -321,7 +322,7 @@ class ReviewStepBlock(
                 components.append(child.student_view_data(context))
 
         return {
-            'block_id': unicode(self.scope_ids.usage_id),
+            'block_id': six.text_type(self.scope_ids.usage_id),
             'display_name': self.display_name,
             'type': self.CATEGORY,
             'title': self.display_name,

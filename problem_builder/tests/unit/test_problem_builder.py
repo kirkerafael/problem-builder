@@ -1,16 +1,15 @@
-import ddt
 import unittest
-
-from mock import MagicMock, Mock, PropertyMock, patch
 from random import random
 
+import ddt
+from mock import MagicMock, Mock, PropertyMock, patch
 from xblock.field_data import DictFieldData
 
 from problem_builder.answer import AnswerRecapBlock
 from problem_builder.mcq import MCQBlock
+from problem_builder.mentoring import (MentoringBlock, MentoringMessageBlock,
+                                       _default_options_config)
 from problem_builder.mrq import MRQBlock
-
-from problem_builder.mentoring import MentoringBlock, MentoringMessageBlock, _default_options_config
 
 from .utils import BlockWithChildrenTestMixin
 

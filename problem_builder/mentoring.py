@@ -20,43 +20,41 @@
 
 # Imports ###########################################################
 
-import logging
 import json
-
+import logging
 from collections import namedtuple
 from itertools import chain
 
+import six
 from lazy.lazy import lazy
-
 from xblock.core import XBlock
-from xblock.exceptions import NoSuchViewError, JsonHandlerError
-from xblock.fields import Boolean, Scope, String, Integer, Float, List
+from xblock.exceptions import JsonHandlerError, NoSuchViewError
+from xblock.fields import Boolean, Float, Integer, List, Scope, String
 from xblock.fragment import Fragment
 from xblock.validation import ValidationMessage
-
-from .message import MentoringMessageBlock, get_message_label
-from .mixins import (
-    _normalize_id, QuestionMixin, MessageParentMixin, StepParentMixin, XBlockWithTranslationServiceMixin,
-    StudentViewUserStateMixin, StudentViewUserStateResultsTransformerMixin, ExpandStaticURLMixin)
-from .step_review import ReviewStepBlock
-
-from xblockutils.helpers import child_isinstance
-from xblockutils.resources import ResourceLoader
-from xblockutils.settings import XBlockWithSettingsMixin
-from xblockutils.studio_editable import (
-    NestedXBlockSpec, StudioEditableXBlockMixin, StudioContainerWithNestedXBlocksMixin,
-)
 
 from problem_builder.answer import AnswerBlock, AnswerRecapBlock
 from problem_builder.completion import CompletionBlock
 from problem_builder.mcq import MCQBlock, RatingBlock
-from problem_builder.swipe import SwipeBlock
 from problem_builder.mrq import MRQBlock
 from problem_builder.plot import PlotBlock
 from problem_builder.slider import SliderBlock
+from problem_builder.swipe import SwipeBlock
 from problem_builder.table import MentoringTableBlock
-from .utils import I18NService
+from xblockutils.helpers import child_isinstance
+from xblockutils.resources import ResourceLoader
+from xblockutils.settings import XBlockWithSettingsMixin
+from xblockutils.studio_editable import (NestedXBlockSpec,
+                                         StudioContainerWithNestedXBlocksMixin,
+                                         StudioEditableXBlockMixin)
 
+from .message import MentoringMessageBlock, get_message_label
+from .mixins import (ExpandStaticURLMixin, MessageParentMixin, QuestionMixin,
+                     StepParentMixin, StudentViewUserStateMixin,
+                     StudentViewUserStateResultsTransformerMixin,
+                     XBlockWithTranslationServiceMixin, _normalize_id)
+from .step_review import ReviewStepBlock
+from .utils import I18NService
 
 try:
     # Used to detect if we're in the workbench so we can add Font Awesome
@@ -145,7 +143,7 @@ class BaseMentoringBlock(
         try:
             return super(BaseMentoringBlock, self).url_name
         except AttributeError:
-            return unicode(self.scope_ids.usage_id)
+            return six.text_type(self.scope_ids.usage_id)
 
     @property
     def review_tips_json(self):
@@ -768,7 +766,7 @@ class MentoringBlock(
                 components.append(block.student_view_data())
 
         return {
-            'block_id': unicode(self.scope_ids.usage_id),
+            'block_id': six.text_type(self.scope_ids.usage_id),
             'display_name': self.display_name,
             'max_attempts': self.max_attempts,
             'extended_feedback': self.extended_feedback,
@@ -1117,7 +1115,7 @@ class MentoringWithExplicitStepsBlock(BaseMentoringBlock, StudioContainerWithNes
 
         return {
             'title': self.display_name,
-            'block_id': unicode(self.scope_ids.usage_id),
+            'block_id': six.text_type(self.scope_ids.usage_id),
             'display_name': self.display_name,
             'show_title': self.show_title,
             'weight': self.weight,

@@ -4,11 +4,11 @@ import math
 import re
 import time
 
-from mock import patch, Mock
+from mock import Mock, patch
 from selenium.common.exceptions import NoSuchElementException
-from xblockutils.base_test import SeleniumXBlockTest
 
 from problem_builder.instructor_tool import PAGE_SIZE, InstructorToolBlock
+from xblockutils.base_test import SeleniumXBlockTest
 
 
 class MockTasksModule(object):
