@@ -1,4 +1,5 @@
-bok_choy==0.4.3
+-e xblock-sdk
+bok_choy==0.7.1
 ddt
 django_nose>=1.4.4
 -e git+https://github.com/edx/acid-block.git@e46f9cda8a03e121a00c7e347084d142d22ebfb7#egg=acid-xblock
@@ -6,12 +7,13 @@ django_nose>=1.4.4
 lazy
 lxml
 mock
-selenium==2.47.3  # 2.48 is not working atm
+selenium==3.4.1
 webob
 XBlock>=1.2
 Django>=1.11,<2.0
 pytest
 coverage
--e git+https://github.com/edx/xblock-sdk.git@v0.1.6#egg=xblock-sdk
 pylint
 pycodestyle
+-r xblock-sdk/requirements/base.txt
+-r xblock-sdk/requirements/test.txt
