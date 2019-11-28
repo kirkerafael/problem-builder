@@ -44,14 +44,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            echo "$PATH"
             export PATH="$(pwd)/firefox/:$PATH"
-            echo "$PATH"
-            which geckodriver
-            geckodriver --version
-            which firefox
-            firefox --version
-            venv/bin/pip freeze
             mkdir -p /tmp/coverage/$CIRCLE_SHA1
             venv/bin/tox -e <<parameters.tox_env>>
             if [ -e .coverage.* ]; then
