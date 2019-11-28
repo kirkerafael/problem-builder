@@ -6,7 +6,7 @@
 #
 -e git+https://github.com/edx/acid-block.git@98aecba94ecbfa934e2d00262741c0ea9f557fc9#egg=acid-xblock
 -e git+https://github.com/edx/django-pyfs.git@1.0.3#egg=django-pyfs==1.0.3
--e file:///home/swalladge/proj/open-craft/problem-builder/xblock-sdk
+-e xblock-sdk
 appdirs==1.4.3
 astroid==1.6.6            # via pylint
 atomicwrites==1.3.0
