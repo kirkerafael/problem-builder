@@ -135,15 +135,15 @@ workflows:
             tags:
               only: /.*/
       - build:
-          name: py27-django111-unit
-          tox_env: py27-django111-unit
+          name: py27-unit
+          tox_env: py27-unit
           docker_image: circleci/python:2.7.14-browsers
           filters:
             tags:
               only: /.*/
       - build:
-          name: py27-django111-integration
-          tox_env: py27-django111-integration
+          name: py27-integration
+          tox_env: py27-integration
           docker_image: circleci/python:2.7.14-browsers
           filters:
             tags:
@@ -156,8 +156,8 @@ workflows:
               only: /.*/
           requires:
               - py27-quality
-              - py27-django111-unit
-              - py27-django111-integration
+              - py27-unit
+              - py27-integration
       - deploy:
           name: py27-deploy-sdist
           docker_image: circleci/python:2.7.14
@@ -189,15 +189,15 @@ workflows:
             tags:
               only: /.*/
       - build:
-          name: py35-django111-unit
-          tox_env: py35-django111-unit
+          name: py35-unit
+          tox_env: py35-unit
           docker_image: circleci/python:3.5-browsers
           filters:
             tags:
               only: /.*/
       - build:
-          name: py35-django111-integration
-          tox_env: py35-django111-integration
+          name: py35-integration
+          tox_env: py35-integration
           docker_image: circleci/python:3.5-browsers
           filters:
             tags:
@@ -210,8 +210,7 @@ workflows:
               only: /.*/
           requires:
               - py35-quality
-              - py35-django111-unit
-              - py35-django111-integration
+              - py35- py35-integration
       - deploy:
           name: py35-deploy-bdist_wheel
           docker_image: circleci/python:3.5
