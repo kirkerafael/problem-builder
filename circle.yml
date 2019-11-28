@@ -82,7 +82,12 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/python:2.7.14
+      - image: <<parameters.docker_image>>
+    parameters:
+        docker_image:
+            type: string
+        dist_type:
+            type: string
     steps:
       - checkout
       - restore_cache:
@@ -111,46 +116,7 @@ jobs:
       - run:
           name: Create packages
           command: |
-            python setup.py sdist
-            python setup.py bdist_wheel
-      - run:
-          name: Upload to pypi
-          command: |
-            . venv/bin/activate
-            twine upload dist/*
-
-  deploy_python3:
-    docker:
-      - image: circleci/python:3.5
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependencies-{{ checksum "circle.yml" }}-{{ checksum "setup.py" }}
-      - run:
-          name: Install dependencies
-          command: |
-            virtualenv venv
-            . venv/bin/activate
-            pip install -U pip twine wheel
-      - save_cache:
-          key: dependencies-{{ checksum "circle.yml" }}-{{ checksum "setup.py" }}
-          paths:
-            - "venv"
-      - run:
-          name: Verify commit is tagged and tag matches version
-          command: |
-            . venv/bin/activate
-            python setup.py verify_tag
-      - run:
-          name: Initialize .pypirc
-          command: |
-            echo -e "[pypi]" >> ~/.pypirc
-            echo -e "username = opencraft" >> ~/.pypirc
-            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
-      - run:
-          name: Create packages
-          command: |
-            python setup.py bdist_wheel
+            python setup.py <<parameters.dist_type>>
       - run:
           name: Upload to pypi
           command: |
@@ -193,7 +159,20 @@ workflows:
               - py27-django111-unit
               - py27-django111-integration
       - deploy:
-          name: py27-deploy
+          name: py27-deploy-sdist
+          docker_image: circleci/python:2.7.14
+          dist_type: sdist
+          requires:
+            - py27-coverage
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
+      - deploy:
+          name: py27-deploy-bdist_wheel
+          docker_image: circleci/python:2.7.14
+          dist_type: bdist_wheel
           requires:
             - py27-coverage
           filters:
@@ -233,8 +212,10 @@ workflows:
               - py35-quality
               - py35-django111-unit
               - py35-django111-integration
-      - deploy_python3:
-          name: py35-deploy
+      - deploy:
+          name: py35-deploy-bdist_wheel
+          docker_image: circleci/python:3.5
+          dist_type: bdist_wheel
           requires:
             - py35-coverage
           filters:
