@@ -155,7 +155,7 @@ class TableColumnHeader(Change):
                 if child.text:
                     header_html += child.text
                 for grandchild in list(child):
-                    header_html += six.text_type(etree.tostring(grandchild))
+                    header_html += etree.tostring(grandchild).decode('utf-8')
                 to_remove.append(child)
             elif child.tag == "pb-answer":
                 child.tag = "pb-answer-recap"
@@ -345,26 +345,6 @@ class OptionalShowTitleDefaultToFalse(Change):
         self.node.attrib["show_title"] = "false"
 
 
-# An *ordered* list of all XML schema changes:
-xml_changes = [
-    RenameMentoringTag,
-    PrefixTags,
-    HideTitle,
-    RemoveTitle,
-    UnwrapHTML,
-    RenameTableTag,
-    TableColumnHeader,
-    QuizzToMCQ,
-    MCQToRating,
-    ReadOnlyAnswerToRecap,
-    QuestionToField,
-    QuestionSubmitMessageToField,
-    TipChanges,
-    SharedHeaderToHTML,
-    CommaSeparatedListToJson,
-]
-
-
 def convert_xml_to_v2(node, from_version="v1"):
     """
     Given an XML node, re-structure it as needed to convert it from v1 style to v2 style XML.
@@ -373,6 +353,26 @@ def convert_xml_to_v2(node, from_version="v1"):
     to False, for compatibility with old versions of the mentoring block that didn't have
     question titles at all.
     """
+
+    # An *ordered* list of all XML schema changes:
+    xml_changes = [
+        RenameMentoringTag,
+        PrefixTags,
+        HideTitle,
+        RemoveTitle,
+        UnwrapHTML,
+        RenameTableTag,
+        TableColumnHeader,
+        QuizzToMCQ,
+        MCQToRating,
+        ReadOnlyAnswerToRecap,
+        QuestionToField,
+        QuestionSubmitMessageToField,
+        TipChanges,
+        SharedHeaderToHTML,
+        CommaSeparatedListToJson,
+    ]
+
     if from_version == "v0":
         xml_changes.append(OptionalShowTitleDefaultToFalse)
 

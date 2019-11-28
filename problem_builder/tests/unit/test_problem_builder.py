@@ -22,12 +22,12 @@ class TestMRQBlock(BlockWithChildrenTestMixin, unittest.TestCase):
         """
         block = MRQBlock(Mock(), DictFieldData({}), Mock())
 
-        self.assertItemsEqual(
-            block.student_view_data().keys(),
-            [
+        self.assertEqual(
+            sorted(block.student_view_data().keys()),
+            sorted([
                 'hide_results', 'tips', 'block_id', 'display_name',
                 'weight', 'title', 'question', 'message', 'type', 'id', 'choices'
-            ]
+            ])
         )
 
 
@@ -39,11 +39,11 @@ class TestAnswerRecapBlock(BlockWithChildrenTestMixin, unittest.TestCase):
         """
         block = AnswerRecapBlock(Mock(), DictFieldData({}), Mock())
 
-        self.assertItemsEqual(
-            block.student_view_data().keys(),
-            [
+        self.assertEqual(
+            sorted(block.student_view_data().keys()),
+            sorted([
                 'block_id', 'display_name', 'type', 'id', 'name', 'description'
-            ]
+            ])
         )
 
 

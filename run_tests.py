@@ -27,15 +27,11 @@ def patch_broken_pipe_error():
     http://stackoverflow.com/a/22618740/51397"""
 
     import socket
-    try:
-        from SocketServer import BaseServer
-    except ImportError:
-        # name changed in python3
-        from socketserver import BaseServer
+    from six.moves import socketserver
 
     from wsgiref import handlers
 
-    handle_error = BaseServer.handle_error
+    handle_error = socketserver.BaseServer.handle_error
     log_exception = handlers.BaseHandler.log_exception
 
     def is_broken_pipe_error():
@@ -52,7 +48,7 @@ def patch_broken_pipe_error():
         if not is_broken_pipe_error():
             log_exception(self, exc_info)
 
-    BaseServer.handle_error = my_handle_error
+    socketserver.BaseServer.handle_error = my_handle_error
     handlers.BaseHandler.log_exception = my_log_exception
 
 if __name__ == "__main__":
