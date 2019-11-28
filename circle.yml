@@ -38,6 +38,10 @@ jobs:
       - run:
           name: Run tests
           command: |
+            which geckodriver
+            geckodriver --version
+            which firefox
+            firefox --version
             mkdir -p /tmp/coverage/$CIRCLE_SHA1
             venv/bin/tox -e <<parameters.tox_env>>
             if [ -e .coverage.* ]; then
