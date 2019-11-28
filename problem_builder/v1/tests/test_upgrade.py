@@ -22,10 +22,10 @@ Test that we can upgrade from mentoring v1 to problem builder (v2).
 """
 import os.path
 import unittest
-from six import StringIO
 
 import ddt
 from lxml import etree
+from six import StringIO
 from xblock.core import XBlock
 from xblock.fields import ScopeIds
 from xblock.runtime import DictKeyValueStore, KvsFieldData

@@ -32,10 +32,10 @@ instance which was kept on gsehub's GitHub account.
 import logging
 import sys
 import warnings
-from six import StringIO
 
 import six
 from lxml import etree
+from six import StringIO
 
 from courseware.models import StudentModule
 from mentoring import MentoringBlock
