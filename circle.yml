@@ -195,12 +195,14 @@ workflows:
       - build:
           name: py27-django111-unit
           tox_env: py27-django111-unit
+          docker_image: circleci/python:2.7.14-browsers
           filters:
             tags:
               only: /.*/
       - build:
           name: py27-django111-integration
           tox_env: py27-django111-integration
+          docker_image: circleci/python:2.7.14-browsers
           filters:
             tags:
               only: /.*/
@@ -222,22 +224,24 @@ workflows:
             branches:
               ignore: /.*/
 
-      - build_python3:
+      - build:
           name: quality_python3
           tox_env: py35-quality
           docker_image: circleci/python:3.5-browsers
           filters:
             tags:
               only: /.*/
-      - build_python3:
+      - build:
           name: py35-django111-unit
           tox_env: py35-django111-unit
+          docker_image: circleci/python:3.5-browsers
           filters:
             tags:
               only: /.*/
-      - build_python3:
+      - build:
           name: py35-django111-integration
           tox_env: py35-django111-integration
+          docker_image: circleci/python:3.5-browsers
           filters:
             tags:
               only: /.*/
