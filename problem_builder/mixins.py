@@ -1,5 +1,6 @@
 import json
 
+import six
 import webob
 from lazy import lazy
 from xblock.core import XBlock
@@ -202,7 +203,7 @@ class StudentViewUserStateMixin(object):
 
         result = {}
         transforms = self.transforms()
-        for _, field in self.fields.iteritems():
+        for _, field in six.iteritems(self.fields):
             # Only insert fields if their scopes and field names match
             if field.scope in self.INCLUDE_SCOPES and field.name in self.USER_STATE_FIELDS:
                 transformer = transforms.get(field.name, lambda value: value)

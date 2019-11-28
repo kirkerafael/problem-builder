@@ -499,7 +499,7 @@ class DashboardBlock(StudioEditableXBlockMixin, ExportMixin, XBlock):
             add_error(_(u'Invalid block url_name given: "{bad_url_name}"').format(bad_url_name=six.text_type(e)))
 
         if data.exclude_questions:
-            for key, value in data.exclude_questions.iteritems():
+            for key, value in six.iteritems(data.exclude_questions):
                 if not isinstance(value, list):
                     add_error(
                         _(u"'Questions to be hidden' is malformed: value for key {key} is {value}, "
@@ -515,7 +515,7 @@ class DashboardBlock(StudioEditableXBlockMixin, ExportMixin, XBlock):
                     )
 
         if data.average_labels:
-            for key, value in data.average_labels.iteritems():
+            for key, value in six.iteritems(data.average_labels):
                 if not isinstance(value, six.string_types):
                     add_error(
                         _(u"'Label for average value' is malformed: value for key {key} is {value}, expected string")

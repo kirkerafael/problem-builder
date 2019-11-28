@@ -26,6 +26,7 @@ from the parsed XML, as part of the upgrade process.
 It works by parsing the XML and creating XBlocks in a temporary runtime
 environment, so that the blocks' fields can be read and copied into Studio.
 """
+import six
 from xblock.fields import Scope
 from xblock.runtime import (DictKeyValueStore, KvsFieldData, MemoryIdManager,
                             Runtime, ScopeIds)
@@ -88,7 +89,7 @@ def studio_update_from_node(block, node):
         Recursively copy all fields and children from temp_block to real_block.
         """
         # Fields:
-        for field_name, field in temp_block.fields.iteritems():
+        for field_name, field in six.iteritems(temp_block.fields):
             if field.scope in (Scope.content, Scope.settings) and field.is_set_on(temp_block):
                 setattr(real_block, field_name, getattr(temp_block, field_name))
         # Children:
