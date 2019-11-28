@@ -419,14 +419,14 @@ class MentoringBlock(
         """Compute the student score taking into account the weight of each step."""
         steps = self.steps
         steps_map = {q.name: q for q in steps}
-        total_child_weight = sum(float(step.weight) for step in steps)
+        total_child_weight = sum(float(step.weight if step.weight != None else 0) for step in steps)
         if total_child_weight == 0:
             return Score(0, 0, [], [], [])
         points_earned = 0
         for q_name, q_details in self.student_results:
             question = steps_map.get(q_name)
             if question:
-                points_earned += q_details['score'] * question.weight
+                points_earned += q_details['score'] * (question.weight if question.weight != None else 0)
         score = points_earned / total_child_weight
         correct = self.answer_mapper(CORRECT)
         incorrect = self.answer_mapper(INCORRECT)

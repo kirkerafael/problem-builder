@@ -68,8 +68,9 @@ function AnswerBlock(runtime, element) {
             var data = input.data();
 
             // An answer cannot be empty even if min_characters is 0
+            // Yes it can
             if (_.isNumber(data.min_characters)) {
-                var min_characters = _.max([data.min_characters, 1]);
+                var min_characters = _.max([data.min_characters, 0]);
                 if (answer_length < min_characters) {
                     return false;
                 }

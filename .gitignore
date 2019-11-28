@@ -24,3 +24,4 @@ problem_builder.tests.*
 problem_builder/translations/en/LC_MESSAGES/*.mo
 problem_builder/translations/fake*/LC_MESSAGES/*.po
 problem_builder/translations/fake*/LC_MESSAGES/*.mo
+.vscode
