@@ -193,7 +193,7 @@ class QuestionnaireBlockTest(MentoringBaseTest):
         ]
         self.popup_check(mentoring, item_feedbacks, prefix='div[data-name="mrq_1_1_7"]')
 
-        for index, expected_feedback in enumerate(item_feedbacks):
+        for index, _ in enumerate(item_feedbacks):
             choice_wrapper = mentoring.find_elements_by_css_selector('div[data-name="mrq_1_1_7"]' + " .choice")[index]
             choice_wrapper.find_element_by_css_selector(".choice-selector input").click()
             item_feedback_icon = choice_wrapper.find_element_by_css_selector(".choice-result")
