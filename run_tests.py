@@ -25,7 +25,12 @@ def patch_broken_pipe_error():
     http://stackoverflow.com/a/22618740/51397"""
 
     import socket
-    from SocketServer import BaseServer
+    try:
+        from SocketServer import BaseServer
+    except ModuleNotFoundError:
+        # name changed in python3
+        from socketserver import BaseServer
+
     from wsgiref import handlers
 
     handle_error = BaseServer.handle_error
