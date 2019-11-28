@@ -116,7 +116,7 @@ jobs:
 
   build_python3:
     docker:
-      - image: circleci/python:2.7.14-browsers
+      - image: circleci/python:3.5-browsers
     parameters:
         tox_env:
             type: string
@@ -164,7 +164,7 @@ jobs:
 
   coverage_python3:
     docker:
-      - image: circleci/python:2.7.14
+      - image: circleci/python:3.5
     steps:
       - checkout
       - run:
@@ -191,7 +191,7 @@ jobs:
 
   deploy_python3:
     docker:
-      - image: circleci/python:2.7.14
+      - image: circleci/python:3.5
     steps:
       - checkout
       - restore_cache:
