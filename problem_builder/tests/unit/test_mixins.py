@@ -273,7 +273,7 @@ class TestStudentViewUserStateMixin(unittest.TestCase):
 
         block.USER_STATE_FIELDS = ['answer_1', 'answer_2', 'preference_1', 'preference_2', 'user_info_1', 'user_info_2']
         student_user_state_response = block.student_view_user_state()
-        student_user_state = json.loads(student_user_state_response.body)
+        student_user_state = json.loads(student_user_state_response.body.decode('utf-8'))
 
         expected = user_fields.copy()
         expected["user_info_2"] = expected["user_info_2"].isoformat()

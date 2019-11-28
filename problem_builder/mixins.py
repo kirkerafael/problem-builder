@@ -228,7 +228,10 @@ class StudentViewUserStateMixin(object):
         result = self.build_user_state_data(context)
         json_result = json.dumps(result, cls=DateTimeEncoder)
 
-        return webob.response.Response(body=json_result, content_type='application/json')
+        return webob.response.Response(
+            body=json_result.encode('utf-8'),
+            content_type='application/json'
+        )
 
 
 class StudentViewUserStateResultsTransformerMixin(object):
