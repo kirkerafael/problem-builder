@@ -27,7 +27,7 @@ def patch_broken_pipe_error():
     import socket
     try:
         from SocketServer import BaseServer
-    except ModuleNotFoundError:
+    except ImportError:
         # name changed in python3
         from socketserver import BaseServer
 

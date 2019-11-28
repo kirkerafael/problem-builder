@@ -119,12 +119,12 @@ $ tox
 
 To run only the quality tests run:
 ```bash
-$ tox -e py{27,35}-quality
+$ tox -e py27-quality
 ```
 
 To run only the integration tests run:
 ```bash
-$ tox -e py{27,35}-integration
+$ tox -e py27-integration
 ```
 
 Working with Translations
